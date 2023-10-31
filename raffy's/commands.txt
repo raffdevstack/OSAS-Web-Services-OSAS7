@@ -1,0 +1,1 @@
+php artisan migrate:fresh --path=database/migrations/2023_10_28_134617_create_students_table.php
