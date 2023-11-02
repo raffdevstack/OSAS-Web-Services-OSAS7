@@ -12,16 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->id('student_id');
+            $table->id('student_account_id');
             $table->string('student_lname', 50); // Limit to 50 characters
             $table->string('student_fname', 50); // Limit to 50 characters
-            $table->string('student_mi', 3); // Limit to 50 characters
             $table->string('email', 100)->unique(); // Limit to 100 characters and make it unique
-            $table->string('password'); // You should hash the password before storing it
-            $table->string('student_address', 255); // Limit to 255 characters
-            $table->string('student_image')->nullable(); // Store the image path, make it nullable
-            $table->string('student_course', 100); // Limit to 100 characters
-            $table->string('student_section', 10); // Limit to 10 characters
+            $table->string('student_picture', 255);
+
+            $table->string('student_address', 255)->nullable(); // Limit to 255 characters
+            $table->string('student_course', 100)->nullable(); // Limit to 100 characters
+            $table->string('student_section', 10)->nullable(); // Limit to 10 characters
+
+            $table->string('password')->nullable(); // You should hash the password before storing it
             $table->Decimal('google_id', 21, 0)->nullable();
             $table->timestamps();
         });

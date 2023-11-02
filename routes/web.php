@@ -52,6 +52,8 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::group(['prefix' => 'student'], function () {
+    Route::get('/', [StudentController::class, 'showIndex'])->name('student_home');
     Route::get('/login',[StudentController::class, 'showLogin'])->name('show_login');
     Route::get('/auth/google/callback/', [GoogleAuthController::class, 'callback'])->name('google_callback');
+    Route::get('/signup-step1',[StudentController::class, 'showSignup1'])->name('signup1');
 });

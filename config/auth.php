@@ -65,6 +65,7 @@ return [
             'model' => App\Models\User::class,
             'model' => App\Models\OsasAdmin::class,
             'model' => App\Models\Admin::class,
+            'model' => App\Models\Student::class,
         ],
 
         // 'users' => [

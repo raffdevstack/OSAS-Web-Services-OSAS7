@@ -45,11 +45,11 @@
                                 d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        Login with Google
+                        Continue with Google
                     </button>
                     </a>
                 </div>
-                <div class=" w-1/2 p-2">
+                {{-- <div class=" w-1/2 p-2">
                     <h2 class="my-2">Don't have acccount yet?</h2>
                     <button
                         class="flex  w-max items-center justify-center mt-2 h-10 w-full bg-white-900 text-sm text-gray-600 hover:bg-gray-200 rounded-full outline outline-gray-600  outline-1 px-4 py-1">
@@ -61,7 +61,7 @@
                         </svg>
                         Sign-up with Google
                     </button>
-                </div>
+                </div> --}}
             </div>
          
         </div>
