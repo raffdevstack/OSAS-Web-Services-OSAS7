@@ -30,7 +30,7 @@
     <!--right-->
     <div class="shadow-lg p-8 bg-white rounded-lg min-h-full m-5 mt-0 md:w-1/2 min-h-full flex flex-col sm:w-full md:mt-5">
         <div>
-            <form action="/admin/login/process" method="POST" class=" flex flex-col">
+            <form action="{{ route('process-login') }}" method="POST" class=" flex flex-col">
                 @csrf
                 <h1 class="text-2xl font-bold text-gray-900">Admin Login</h1>
                 <div class="mt-4">

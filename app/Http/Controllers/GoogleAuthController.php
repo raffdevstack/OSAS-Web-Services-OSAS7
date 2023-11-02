@@ -37,10 +37,9 @@ class GoogleAuthController extends Controller
             // $finduser = User::where('google_id', $user->id)->first();
             $findStudent = Student::where('google_id', $google_user_id->getId())->first();
             if ($findStudent) {
-                dd($google_user_id);
-                // Auth::login($findStudent);
-                // return redirect('/student')->with('message', 'Successfully Logged In!');
-                // return redirect()->intended('/admin')->with('message', 'Successfully Logged In!'); old code
+                // dd($google_user_id);
+                Auth::login($findStudent);
+                return redirect('/student')->with('message', 'Successfully Logged In!');
             } else {
                 // dd($google_user_id);
                 try {

@@ -47,8 +47,8 @@ Route::group([], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/signup', [AdminController::class, 'signup'])->name('super_signup')->middleware('super_admin_setup');
-    Route::post('/signup/store', [AdminController::class, 'store']);
-    Route::post('/login/process', [AdminController::class, 'process']);
+    Route::post('/signup/store', [AdminController::class, 'storeNewAdmin']);
+    Route::post('/login/process-login', [AdminController::class, 'processLogin'])->name('process-login');
 });
 
 Route::group(['prefix' => 'student'], function () {

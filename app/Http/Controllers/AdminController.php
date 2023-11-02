@@ -20,6 +20,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 
 use function Laravel\Prompts\alert;
+use function Laravel\Prompts\error;
 
 class AdminController extends Controller
 {
@@ -67,7 +68,7 @@ class AdminController extends Controller
     }
 
     // storing super admin signup data
-    public function store(Request $request)
+    public function storeNewAdmin(Request $request)
     {
         $validated = $request->validate([
             "admin_lname" => ['required', 'min:2', 'alpha_spaces'],
@@ -173,17 +174,24 @@ class AdminController extends Controller
     }
 
 
-    public function process(Request $request)
+    public function processLogin(Request $request)
     {
-        $validated = $request->validate([
-            "email" => ['required', 'email'],
-            'password' => 'required'
-        ]);
-        if (auth()->attempt($validated)) {
-            session()->regenerate();
-            return redirect('/admin/')->with('message', 'Successfully Logged In!');
+        try {
+
+            $validated = $request->validate([
+                "email" => ['required', 'email'],
+                'password' => 'required'
+            ]);
+
+            if (auth()->attempt($validated)) {
+                session()->regenerate();
+                return redirect('/admin/')->with('message', 'Successfully Logged In!');
+            }
+            return back()->withErrors($validated);
+
+        } catch (Exception $e) {
+            dd($e);
         }
-        return back()->withErrors(['email' => 'Login failed! Incorrect Email or Password']);
     }
 
     public function redirect() // this for google sso

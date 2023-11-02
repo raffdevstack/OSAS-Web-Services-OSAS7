@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('admin_lname', 20)->notNull();
             $table->string('admin_fname', 20)->notNull();
             $table->string('admin_mi', 3)->notNull();
-            $table->string('employee_id', 3)->nullable();
+            $table->string('employee_id', 12)->nullable();
             $table->string('admin_contact', 15)->nullable();
             $table->string('email', 50)->notNull()->unique();
             $table->timestamp('email_verified_at')->nullable();
