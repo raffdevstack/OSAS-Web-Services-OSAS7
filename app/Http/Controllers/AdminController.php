@@ -24,11 +24,49 @@ use function Laravel\Prompts\error;
 
 class AdminController extends Controller
 {
+
     // signup and login
+
     public function showSignup()
     {
         return view('admin.signup');
     }
+    public function showLogin()
+    {
+        return view('admin.login');
+    }
+    public function signupStore(Request $request) {
+        $validated = $request->validate([
+            "admin_lname" => ['required', 'min:2', 'alpha_spaces'],
+            "admin_fname" => ['required', 'min:2', 'alpha_spaces'],
+            "admin_mi" => ['required', 'regex:/^(N\/A|[A-Za-z])$/'], //require to be clearer, user must put N/A if they have no mi
+            "employee_id" => ['required', 'max:6'],
+            "admin_contact" => ['nullable', 'numeric', 'digits_between:10,15'],
+            "email" => ['required', 'email', Rule::unique('admins', 'email')],
+            'password' => [
+                'required',
+                'confirmed',
+                'min:8',
+                'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/',
+            ],
+        ]);
+        $validated['password'] = bcrypt($validated['password']);
+        Admin::create($validated);
+
+        return redirect('/admin/login')->with('message', 'Successfully Created an Admin Account');
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/admin/login')->with('message', 'Logout successful');
+    }
+
+
+
+
 
     public function index()
     {
@@ -47,7 +85,8 @@ class AdminController extends Controller
         return view('admin.manage.index', compact('admins', 'offices', 'admin_types'));
     }
 
- 
+
+
 
 
     public function create()
@@ -57,43 +96,6 @@ class AdminController extends Controller
         return view('admin.manage.create', compact('offices', 'admin_types'));
     }
 
-    public function login()
-    {
-        return view('admin.login');
-    }
-
-    public function logout(Request $request)
-    {
-        auth()->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/admin/login')->with('message', 'Logout successful');
-    }
-
-    // storing super admin signup data
-    public function storeNewAdmin(Request $request)
-    {
-        $validated = $request->validate([
-            "admin_lname" => ['required', 'min:2', 'alpha_spaces'],
-            "admin_fname" => ['required', 'min:2', 'alpha_spaces'],
-            "admin_mi" => ['required', 'regex:/^(N\/A|[A-Za-z])$/'], //require to be clearer, user must put N/A if they have no mi
-            "employee_id" => ['required', 'max:6'],
-            "admin_contact" => ['nullable', 'numeric', 'digits_between:10,15'],
-            "email" => ['required', 'email', Rule::unique('admins', 'email')],
-            'password' => [
-                'required',
-                'confirmed',
-                'min:8',
-                'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/',
-            ],
-        ]);
-        $validated['admintype_id'] =  1;
-        $validated['office_id'] = 1;
-        $validated['password'] = bcrypt($validated['password']);
-        Admin::create($validated);
-
-        return redirect('/admin/login')->with('message', 'Successfully Created an OSAS Coordinator Account');
-    }
 
     public function storeNew(Request $request)
     {
@@ -191,7 +193,6 @@ class AdminController extends Controller
                 return redirect('/admin/')->with('message', 'Successfully Logged In!');
             }
             return back()->withErrors($validated);
-
         } catch (Exception $e) {
             dd($e);
         }

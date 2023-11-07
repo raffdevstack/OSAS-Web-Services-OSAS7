@@ -1,3 +1,6 @@
+students table
 php artisan migrate:fresh --path=database/migrations/2023_10_28_134617_create_students_table.php
-
 php artisan migrate:reset --path=database/migrations/2023_10_28_134617_create_students_table.php
+
+admins table
+php artisan migrate:reset --path=database/migrations/2023_09_25_184639_create_admins_table.php

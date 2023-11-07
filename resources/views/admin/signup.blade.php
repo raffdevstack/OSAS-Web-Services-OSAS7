@@ -34,17 +34,17 @@
     {{-- right card --}}
     <div
         class="p-8 bg-white rounded-lg min-h-full m-5 mt-0 md:w-1/2 min-h-full flex flex-col sm:w-full md:mt-5  shadow-lg">
-        <form action="/admin/signup/store" method="POST" class=" flex flex-col m-0">
+        <form action="{{ route('admin_signupStore') }}" method="POST" class=" flex flex-col m-0">
             @csrf
             <h1 class="text-2xl font-bold text-gray-900">Create Admin Account</h1>
-            <div class="flex mt-2 opacity-50">
+            <div class="flex mt-4 ">
                 <span
                     class=" text-red-500 text-xs font-small mr-2  py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
                     * Required
                 </span>
                 <span
                     class=" text-gray-500 text-xs font-small mr-2  py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
-                    Put N/A to not applicable fields
+                    Put N/A to Not Applicable fields
                 </span>
             </div>
 

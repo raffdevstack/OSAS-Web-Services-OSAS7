@@ -43,10 +43,12 @@ Route::group([], function () {
 Route::group(['prefix' => 'admin'], function () {
 
     // signup and login
-    Route::get('/signup', [AdminController::class, 'showSignup'])
-        ->name('admin_signup');
-    Route::post('/signup/store', [AdminController::class, 'storeNewAdmin'])
-        ->name('admin_storeNewAdmin');
+    Route::middleware(['your_middleware_name'])->group(function () {
+        Route::get('/signup', [AdminController::class, 'showSignup'])
+            ->name('admin_signup');
+        Route::post('/signup-store', [AdminController::class, 'signupStore'])
+            ->name('admin_signupStore');
+    });
     Route::get('/login', [AdminController::class, 'showLogin'])
         ->name('admin_showLogin');
     Route::post('/login/process-login', [AdminController::class, 'processLogin'])
@@ -62,11 +64,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/manage/profile/{admin}', [AdminController::class, 'showAdminProfile'])
         ->name('admin_profile');
 
+
     // manage admins
     Route::get('/create', [AdminController::class, 'create'])
         ->name('admin_create');
-    Route::post('/store_new', [AdminController::class, 'storeNew'])
-        ->name('admin_storenew');
+
     Route::get('/manage', [AdminController::class, 'manage'])
         ->name('manage_admins');
 
