@@ -1,3 +1,6 @@
 @include('partials.__header')
-    <h1>hey student</h1>
+    <header class="bg-white">
+        logo diri
+        <nav></nav>
+    </header>
 @include('partials.__footer')

@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="mt-6">
-            <a href="">
+            <a href="{{ route('student_home') }}">
                 <button type="submit"
                     class="block w-full h-10 hover:bg-red-900 text-white font-medium py-2 rounded-full text-center transition duration-300 ourmaroonbg">
                     Go to dashboard
