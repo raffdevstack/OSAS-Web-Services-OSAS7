@@ -22,38 +22,68 @@ use App\Http\Controllers\StudentController;
 
 // superadmincheck - cchecks if there is super admin
 Route::middleware(['superadmincheck'])->group(function () {
-    // routes that only accessible if there are super admins
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('auth');
-    Route::get('/admin/manage/profile/{admin}', [AdminController::class, 'showAdminProfile'])->name('admin.profile');
-    Route::get('/admin/offices', [AdminController::class, 'offices'])->name('admin.offices')->middleware('auth');
-    Route::get('/admin/login', [AdminController::class, 'login'])->name('login')->middleware('guest');
-    Route::get('/admin/manage', [AdminController::class, 'manage'])->name('admin.manage')->middleware('auth');
-    Route::post('/admin/logout', [AdminController::class, 'logout']);
-    // creation of new admins
-    Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
-    Route::post('/admin/store_new', [AdminController::class, 'storeNew'])->name('admin.store_new');
 });
 
+// routes that only accessible if there are super admins
+
+
+
+// all outside routes
 Route::group([], function () {
     Route::get('/', [Controller::class, 'index']); // welcome page
     Route::get('/data-privacy', [Controller::class, 'showDataPrivacyPolicy'])->name('data-privacy-policy');
     Route::get('/terms-conditions', [Controller::class, 'showTermsAndConditions'])->name('terms-conditions');
     Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('google_redirect');
-   
     Route::get('/qr-scanner', [Controller::class, 'showScanner'])->name('qr_scanner');
     Route::get('/qr-scanner2', [Controller::class, 'showScanner2'])->name('qr_scanner2');
     Route::get('/qr-value-get', [QrScannerController::class, 'getValue'])->name('qr_value');
 });
 
+// all admin routes here
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/signup', [AdminController::class, 'signup'])->name('super_signup')->middleware('super_admin_setup');
-    Route::post('/signup/store', [AdminController::class, 'storeNewAdmin']);
-    Route::post('/login/process-login', [AdminController::class, 'processLogin'])->name('process-login');
+
+    // signup and login
+    Route::get('/signup', [AdminController::class, 'showSignup'])
+        ->name('admin_signup');
+    Route::post('/signup/store', [AdminController::class, 'storeNewAdmin'])
+        ->name('admin_storeNewAdmin');
+    Route::get('/login', [AdminController::class, 'showLogin'])
+        ->name('admin_showLogin');
+    Route::post('/login/process-login', [AdminController::class, 'processLogin'])
+        ->name('process_login');
+    Route::post('/logout', [AdminController::class, 'logout'])
+        ->name('admin_logout');
+
+    // dashboard
+    Route::get('/', [AdminController::class, 'index'])
+        ->name('admin_dashboard');
+
+    // admin profile
+    Route::get('/manage/profile/{admin}', [AdminController::class, 'showAdminProfile'])
+        ->name('admin_profile');
+
+    // manage admins
+    Route::get('/create', [AdminController::class, 'create'])
+        ->name('admin_create');
+    Route::post('/store_new', [AdminController::class, 'storeNew'])
+        ->name('admin_storenew');
+    Route::get('/manage', [AdminController::class, 'manage'])
+        ->name('manage_admins');
+
+    // admin offices
+    Route::get('/offices', [AdminController::class, 'offices'])
+        ->name('admin_offices');
 });
 
+// all student routes here
 Route::group(['prefix' => 'student'], function () {
-    Route::get('/', [StudentController::class, 'showIndex'])->name('student_home');
-    Route::get('/login',[StudentController::class, 'showLogin'])->name('show_login');
-    Route::get('/auth/google/callback/', [GoogleAuthController::class, 'callback'])->name('google_callback');
-    Route::get('/signup-step1',[StudentController::class, 'showSignup1'])->name('signup1');
+    Route::get('/', [StudentController::class, 'showIndex'])
+        ->name('student_home');
+    Route::get('/login', [StudentController::class, 'showLogin'])
+        ->name('student_showlogin');
+    Route::get('/signup-step1', [StudentController::class, 'showSignup1'])
+        ->name('signup1');
+    // for google single sign on
+    Route::get('/auth/google/callback/', [GoogleAuthController::class, 'callback'])
+        ->name('google_callback');
 });

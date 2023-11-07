@@ -24,6 +24,12 @@ use function Laravel\Prompts\error;
 
 class AdminController extends Controller
 {
+    // signup and login
+    public function showSignup()
+    {
+        return view('admin.signup');
+    }
+
     public function index()
     {
         return view('admin.index');
@@ -41,10 +47,7 @@ class AdminController extends Controller
         return view('admin.manage.index', compact('admins', 'offices', 'admin_types'));
     }
 
-    public function signup()
-    {
-        return view('admin.signup');
-    }
+ 
 
 
     public function create()
