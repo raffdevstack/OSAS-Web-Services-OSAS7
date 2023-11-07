@@ -14,7 +14,7 @@
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items space-x-1">
                     <li class="inline-flex items-center">
-                        <a href="{{ route('admin.dashboard') }}"
+                        <a href=""
                             class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                             <span class="px-1 material-symbols-rounded" style="font-size:20px">dashboard</span>
                             Dashboard
@@ -133,7 +133,6 @@
                                           file:bg-yellow-500
                                     value="{{ old('admin_image') }}" />
                                 @include('partials.__input_error', ['fieldName' => 'admin_image'])
-                                
                             </div>
                         </div>
                         {{-- second column --}}
@@ -169,7 +168,7 @@
                                 </select>
                                 @include('partials.__input_error', ['fieldName' => 'office_id'])
                             </div>
-
+                            {{-- input admin types --}}
                             <div class="mt-4">
                                 <label for="admintype_id" class="block text-gray-600 font-bold text-sm">Admin
                                     Type <span class="text-red-500">*</span></label>

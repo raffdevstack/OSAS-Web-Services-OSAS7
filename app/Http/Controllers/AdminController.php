@@ -31,16 +31,20 @@ class AdminController extends Controller
     {
         return view('admin.signup');
     }
+    public function showSignup2()
+    {
+        return view('admin.signup2');
+    }
     public function showLogin()
     {
         return view('admin.login');
     }
-    public function signupStore(Request $request) {
+    public function signupStore(Request $request)
+    {
         $validated = $request->validate([
             "admin_lname" => ['required', 'min:2', 'alpha_spaces'],
             "admin_fname" => ['required', 'min:2', 'alpha_spaces'],
             "admin_mi" => ['required', 'regex:/^(N\/A|[A-Za-z])$/'], //require to be clearer, user must put N/A if they have no mi
-            "employee_id" => ['required', 'max:6'],
             "admin_contact" => ['nullable', 'numeric', 'digits_between:10,15'],
             "email" => ['required', 'email', Rule::unique('admins', 'email')],
             'password' => [
@@ -51,9 +55,35 @@ class AdminController extends Controller
             ],
         ]);
         $validated['password'] = bcrypt($validated['password']);
-        Admin::create($validated);
+        $newAdmin = Admin::create($validated);
 
-        return redirect('/admin/login')->with('message', 'Successfully Created an Admin Account');
+        // Store 'admin_id' in the session
+        session()->put('admin_id', $newAdmin->admin_id);
+
+        return redirect(route('admin_signup2'))
+            ->with('message', 'Successfully Created an Admin Account');
+    }
+
+    // for the step 2
+    public function signupStore2(Request $request, $id)
+    {
+
+        $validated = $request->validate([
+            "employee_id" => ['required', 'max:6'],
+        ]);
+
+        $validated['admintype_id'] = 1;
+        
+        // Find the admin by ID and update the attributes
+        $admin = Admin::find($id);
+
+        if (!$admin) {
+            return redirect()->back()->with('error', 'Admin not found');
+        }
+
+        $admin->update($validated);
+
+        return redirect(route('admin_signup2'))->with('message', 'Admin data updated successfully');
     }
 
     public function logout(Request $request)

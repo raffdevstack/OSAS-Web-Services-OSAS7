@@ -44,11 +44,15 @@ Route::group(['prefix' => 'admin'], function () {
 
     // signup and login
     Route::middleware(['your_middleware_name'])->group(function () {
-        Route::get('/signup', [AdminController::class, 'showSignup'])
-            ->name('admin_signup');
-        Route::post('/signup-store', [AdminController::class, 'signupStore'])
-            ->name('admin_signupStore');
     });
+    Route::get('/signup', [AdminController::class, 'showSignup'])
+        ->name('admin_signup');
+    Route::get('/signup2', [AdminController::class, 'showSignup2'])
+        ->name('admin_signup2');
+    Route::post('/signup-store', [AdminController::class, 'signupStore'])
+        ->name('admin_signupStore');
+    Route::post('/signup-store2', [AdminController::class, 'signupStore2'])
+        ->name('admin_signupStore2');
     Route::get('/login', [AdminController::class, 'showLogin'])
         ->name('admin_showLogin');
     Route::post('/login/process-login', [AdminController::class, 'processLogin'])

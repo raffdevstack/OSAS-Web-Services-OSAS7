@@ -36,7 +36,10 @@
         class="p-8 bg-white rounded-lg min-h-full m-5 mt-0 md:w-1/2 min-h-full flex flex-col sm:w-full md:mt-5  shadow-lg">
         <form action="{{ route('admin_signupStore') }}" method="POST" class=" flex flex-col m-0">
             @csrf
-            <h1 class="text-2xl font-bold text-gray-900">Create Admin Account</h1>
+            <div class="flex justify-between align">
+                <h1 class="text-2xl font-bold text-gray-900">Create Admin Account</h1>
+                <h3>Step 2</h3>
+            </div>
             <div class="flex mt-4 ">
                 <span
                     class=" text-red-500 text-xs font-small mr-2  py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
@@ -53,91 +56,60 @@
             <div class="lg:grid grid-cols-2 gap-6 ">
                 {{-- first column --}}
                 <div class="col">
-                    {{-- Input Lastname --}}
+                    {{-- office --}}
                     <div class="mt-4">
-                        <label for="admin_lname" class="block text-gray-600 font-bold text-sm">Last Name <span
+                        <label for="admin_lname" class="block text-gray-600 font-bold text-sm">Office<span
                                 class="text-red-500">*</span></label>
-                        <input type="text" name="admin_lname" id="admin_lname" required
-                            class="mt-1 h-10 px-4 py-2 w-full rounded-full border border-gray-300 focus:outline-none focus:border-yellow-400"
-                            value="{{ old('admin_lname') }}">
+                        <input type="text" name="admin_lname" id="admin_lname" readonly required
+                            class="mt-1 h-10 px-4 py-2 w-full rounded-full text-gray-600 border border-gray-300 focus:outline-none focus:border-none"
+                            value="OSAS">
                         @include('partials.__input_error', ['fieldName' => 'admin_lname'])
                     </div>
-                    {{-- Input firstname --}}
+                    {{-- admin types --}}
                     <div class="mt-4">
-                        <label for="admin_fname" class="block text-gray-600 font-bold text-sm">First Name <span
+                        <label for="admin_lname" class="block text-gray-600 font-bold text-sm">Admin Type<span
                                 class="text-red-500">*</span></label>
-                        <input type="text" name="admin_fname" id="admin_fname" required
-                            class=" mt-1 h-10 px-4 py-2 w-full rounded-full border
-                            border-gray-300 focus:outline-none focus:border-yellow-400"
-                            value="{{ old('admin_fname') }}">
-                        @include('partials.__input_error', ['fieldName' => 'admin_fname'])
-                    </div>
-                    {{-- Input MI --}}
-                    <div class="mt-4">
-                        <label for="admin_mi" class="block text-gray-600 font-bold text-sm">Middle Initial <span
-                                class="text-red-500">*</span></label>
-                        <input type="text" name="admin_mi" id="admin_mi" required
-                            class="mt-1 h-10 px-4 py-2 w-full rounded-full border
-                            border-gray-300 focus:outline-none focus:border-yellow-400"
-                            value="{{ old('admin_mi') }}">
-                        @include('partials.__input_error', ['fieldName' => 'admin_mi'])
+                        <input type="text" name="admin_lname" id="admin_lname" readonly required
+                            class="mt-1 h-10 px-4 py-2 w-full rounded-full text-gray-600 border border-gray-300 focus:outline-none focus:border-none"
+                            value="Super Admin">
+                        @include('partials.__input_error', ['fieldName' => 'admin_lname'])
                     </div>
 
                 </div>
                 {{-- second column --}}
                 <div class="col">
+                    {{-- input photo --}}
                     <div class="mt-4">
-                        <label for="email" class="block text-gray-600 font-bold text-sm">Email <span
+                        <label for="admin_image" class="block text-gray-600 font-bold text-sm">
+                            Image Profile
+                        </label>
+                        <input type="file" name="admin_image" id="admin_image"
+                            class="block w-full text-sm text-slate-500
+                                file:mr-4 file:py-2 file:px-4 mt-1
+                                rounded-full border border-gray-300
+                                file:text-sm file:font-semibold
+                                  file:bg-yellow-500
+                            value="{{ old('admin_image') }}" />
+                        @include('partials.__input_error', ['fieldName' => 'admin_image'])
+                    </div>
+                    {{-- input emp id --}}
+                    <div class="mt-4">
+                        <label for="employee_id" class="block text-gray-600 font-bold text-sm">Employee ID <span
                                 class="text-red-500">*</span></label>
-                        <input type="email" name="email" id="email" required
-                            class="h-10 mt-1 px-4 py-2 w-full rounded-full border border-gray-300 focus:outline-none focus:border-yellow-400"
-                            value="{{ old('email') }}">
-                        @include('partials.__input_error', ['fieldName' => 'email'])
-                    </div>
-                    <div class="mt-4">
-                        <label for="admin_contact" class="block text-gray-600 font-bold text-sm">Contact Number</label>
-                        <input type="text" name="admin_contact" id="admin_contact"
+                        <input type="text" name="employee_id" id="employee_id" required
                             class="text-base h-10 mt-1 px-4 py-2 w-full rounded-full border border-gray-300 focus:outline-none focus:border-yellow-400"
-                            value="{{ old('admin_contact') }}">
-                        @include('partials.__input_error', ['fieldName' => 'admin_contact'])
+                            value="{{ old('employee_id') }}">
+                        @include('partials.__input_error', ['fieldName' => 'employee_id'])
                     </div>
+
                 </div>
             </div>
 
-            {{-- Password Prompts --}}
-            <div id="password-error"
-                class="hidden text-xs mt-4 bg-red-200 max-w-content text-red-600 px-2 py-1 rounded">
-                Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, one
-                special character, and one number.
-            </div>
-
-            {{-- password div --}}
-            <div class="lg:grid grid-cols-2 gap-6">
-                {{-- Input password --}}
-                <div class="mt-4">
-                    <label for="password" class="block text-gray-600 text-sm font-bold">Password <span
-                            class="text-red-500">*</span></label>
-                    <input type="password" name="password" id="password" required
-                        class="mt-1 h-10 px-4 py-2 w-full rounded-full border
-                        border-gray-300 focus:outline-none focus:border-yellow-400"
-                        value="{{ old('password') }}">
-                    @include('partials.__input_error', ['fieldName' => 'password'])
-                </div>
-                {{-- Input password_confirmation --}}
-                <div class="mt-4">
-                    <label for="password_confirmation" class="block text-gray-600 text-sm font-bold">Confirm Password
-                        <span class="text-red-500">*</span></label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" required
-                        class="mt-1 h-10 px-4 py-2 w-full rounded-full border border-gray-300 focus:outline-none focus:border-yellow-400"
-                        value="{{ old('password_confirmation') }}">
-                    @include('partials.__input_error', ['fieldName' => 'password_confirmation'])
-                </div>
-            </div>
             {{-- submit button --}}
             <div class="mt-6">
                 <input type="submit"
                     class="block w-full h-10 hover:bg-red-900 text-white font-medium py-2 rounded-full text-center transition duration-300 ourmaroonbg"
-                    value="Create Admin Account">
+                    value="Finish Signup">
             </div>
         </form>
 
