@@ -13,7 +13,7 @@ class Student extends Model implements Authenticatable
 
     protected $table = 'students';
 
-    protected $primaryKey = 'student_id';
+    protected $primaryKey = 'student_osasid';
 
     protected $fillable = [
         'student_lname',

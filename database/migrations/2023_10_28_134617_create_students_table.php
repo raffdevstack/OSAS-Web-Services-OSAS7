@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->id('student_account_id');
+            $table->id('student_osasid');
             $table->string('student_lname', 50); // Limit to 50 characters
             $table->string('student_fname', 50); // Limit to 50 characters
             $table->string('email', 100)->unique(); // Limit to 100 characters and make it unique
