@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::share('title', 'OSAS Admin');
+        View::share('title', 'OSAS Web Services');
 
         Validator::extend('alpha_spaces', function ($attribute, $value) {
             // This rule allows alphabetic characters and spaces
