@@ -1,6 +1,9 @@
 php artisan db:seed --class=InitialSetupSeeder
 
+//clearing
 php artisan cache:clear
+php artisan config:cache
+
 composer dump-autoload -o
 
 students table
