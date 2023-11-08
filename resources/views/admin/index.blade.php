@@ -38,7 +38,7 @@
 
         {{-- 1st, 3 col --}}
         <div class="grid grid-cols-3 gap-4 mb-4">
-            <a href="{{ route('admin.manage') }}">
+            <a href="{{ route('manage_admins') }}">
                 <div class="flex flex-col items-center justify-center h-24 rounded border dark:bg-gray-800"
                     style="background: #14E06D">
                     <span class="material-symbols-outlined">manage_accounts</span>

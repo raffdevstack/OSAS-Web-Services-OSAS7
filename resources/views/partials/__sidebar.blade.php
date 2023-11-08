@@ -14,7 +14,7 @@
    aria-label="Sidebar" style="height: 96vh">
    <div class="h-full rounded-lg m-3 mr-0 shadow-lg ourmaroonbg px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
       <div class="flex flex-col justify-center items-center mt-9">
-         <a href="{{ route('admin.dashboard') }}">
+         <a href="{{ route('admin_dashboard') }}">
                <img src="{{ asset('images/osaslogo.png') }}" class="h-10  sm:h-16" />
          </a>
          <p class="text-white text-lg font-medium mt-1">OSAS</p>
@@ -22,14 +22,14 @@
       </div>
       <ul class="space-y-2 text-gray-100 font-medium mt-9">
          <li
-               class="rounded-lg {{ request()->routeIs('admin.dashboard', 'admin.manage', 'admin.create') ? 'ouryellowbg' : '' }}">
-               <a href="{{ route('admin.dashboard') }}" class="@include('partials.__navli_class')">
+               class="rounded-lg {{ request()->routeIs('admin_dashboard', 'admin.manage', 'admin.create') ? 'ouryellowbg' : '' }}">
+               <a href="{{ route('admin_dashboard') }}" class="@include('partials.__navli_class')">
                   <span class="material-symbols-rounded">dashboard</span>
                   <span class="ml-3">Dashboard</span>
                </a>
          </li>
-         <li class="rounded-lg {{ Route::currentRouteName() == 'admin.offices' ? 'ouryellowbg' : '' }}">
-               <a href="{{ route('admin.offices') }}" class="@include('partials.__navli_class')">
+         <li class="rounded-lg {{ Route::currentRouteName() == 'admin_offices' ? 'ouryellowbg' : '' }}">
+               <a href="{{ route('admin_offices') }}" class="@include('partials.__navli_class')">
                   <span class="material-symbols-rounded">meeting_room</span>
                   <span class="flex-1 ml-3 whitespace-nowrap">Offices</span>
                </a>

@@ -1,10 +1,19 @@
-<button type="button" 
-{{-- fixed right-5 top-5 --}}
+<button type="button" {{-- fixed right-5 top-5 --}}
     class="z-40  flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
     <span class="sr-only">Open user menu</span>
-    @php $default_profile = "https://api.dicebear.com/7.x/initials/svg?seed=".Auth::user()->admin_fname."" @endphp
-    <img class="h-10 w-10 rounded-full border-4" src="{{ Auth::user()->admin_image ? asset("/storage/admin/thumbnail/".Auth::user()->admin_image) : "$default_profile" }}" alt="user photo">
+    @php
+        $default_profile = 'https://api.dicebear.com/7.x/initials/svg?seed=';
+        if (Auth::check() && Auth::user()->admin_fname) {
+            $default_profile .= Auth::user()->admin_fname;
+        } else {
+            // Handle the case where the user is not logged in or admin_fname is null
+            $default_profile .= 'default_seed'; // You can replace "default_seed" with a default value or handle it as needed
+        }
+    @endphp
+    <img class="h-10 w-10 rounded-full border-4"
+        src="{{ Auth::check() && Auth::user()->admin_image ? asset('/storage/admin/thumbnail/' . Auth::user()->admin_image) : $default_profile }}"
+        alt="user photo">
 </button>
 <!-- Dropdown menu -->
 <div class="fixed right-5 top-15 z-40 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
