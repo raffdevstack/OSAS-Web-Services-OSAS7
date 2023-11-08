@@ -9,6 +9,9 @@ use App\Http\Controllers\QrScannerController;
 use App\Http\Controllers\StudentAuthController;
 use App\Http\Controllers\StudentController;
 
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,20 +27,15 @@ use App\Http\Controllers\StudentController;
 Route::middleware(['superadmincheck'])->group(function () {
 });
 
-// routes that only accessible if there are super admins
+// all outside routes, we can add 
 
-
-
-// all outside routes
-Route::group([], function () {
-    Route::get('/', [Controller::class, 'index']); // welcome page
-    Route::get('/data-privacy', [Controller::class, 'showDataPrivacyPolicy'])->name('data-privacy-policy');
-    Route::get('/terms-conditions', [Controller::class, 'showTermsAndConditions'])->name('terms-conditions');
-    Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('google_redirect');
-    Route::get('/qr-scanner', [Controller::class, 'showScanner'])->name('qr_scanner');
-    Route::get('/qr-scanner2', [Controller::class, 'showScanner2'])->name('qr_scanner2');
-    Route::get('/qr-value-get', [QrScannerController::class, 'getValue'])->name('qr_value');
-});
+Route::get('/', [Controller::class, 'index']); // welcome page
+Route::get('/data-privacy', [Controller::class, 'showDataPrivacyPolicy'])->name('data-privacy-policy');
+Route::get('/terms-conditions', [Controller::class, 'showTermsAndConditions'])->name('terms-conditions');
+Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('google_redirect');
+Route::get('/qr-scanner', [Controller::class, 'showScanner'])->name('qr_scanner');
+Route::get('/qr-scanner2', [Controller::class, 'showScanner2'])->name('qr_scanner2');
+Route::get('/qr-value-get', [QrScannerController::class, 'getValue'])->name('qr_value');
 
 // all admin routes here
 Route::group(['prefix' => 'admin'], function () {
