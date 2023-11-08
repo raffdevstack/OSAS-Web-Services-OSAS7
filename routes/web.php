@@ -50,11 +50,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/signup2', [AdminController::class, 'showSignup2'])
         ->name('admin_signup2');
     Route::post('/signup-store', [AdminController::class, 'signupStore'])
-        ->name('admin_signupStore');
+        ->name('admin_signupstore');
     Route::post('/signup-store2', [AdminController::class, 'signupStore2'])
-        ->name('admin_signupStore2');
+        ->name('admin_signupstore2');
     Route::get('/login', [AdminController::class, 'showLogin'])
-        ->name('admin_showLogin');
+        ->name('admin_showlogin');
     Route::post('/login/process-login', [AdminController::class, 'processLogin'])
         ->name('process_login');
     Route::post('/logout', [AdminController::class, 'logout'])
